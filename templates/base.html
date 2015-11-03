@@ -24,6 +24,7 @@
                 <ul class="nav navbar-nav navbar-right">
                   {% if user.is_authenticated %}
                   <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+                  <li><a href="{% url 'try_create' %}">Submit Try</a></li>
                   {% else %}
                   <li><a href="{% url 'auth_login' %}">Login</a></li>
                   {% endif %}
