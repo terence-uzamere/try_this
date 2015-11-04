@@ -2,7 +2,7 @@
 {% block content %}
 {% for try in object_list %}
 <div class="panel">
-  <h3>{{ try.title }}</h3>
+  <h3><a href="{{ try.get_absolute_url }}">{{ try.title }}</a></h3>
   <p>Tried By {{ try.user.username }} on {{ try.created_at }}</p>
 </div>
 {% endfor %}
