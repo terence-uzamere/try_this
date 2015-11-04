@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for try in object_list %}
+<div class="panel">
+  <h3>{{ try.title }}</h3>
+  <p>Tried By {{ try.user.username }} on {{ try.created_at }}</p>
+</div>
+{% endfor %}
+{% endblock %}

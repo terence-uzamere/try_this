@@ -23,6 +23,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                   {% if user.is_authenticated %}
+                  <li><a href="{% url 'try_list' %}">Categories</a></li>
                   <li><a href="{% url 'auth_logout' %}">Logout</a></li>
                   <li><a href="{% url 'try_create' %}">Submit Try</a></li>
                   {% else %}
@@ -35,7 +36,7 @@
     <div class="container">
         {% block content %}
         {% endblock %}
-    </div>    
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>

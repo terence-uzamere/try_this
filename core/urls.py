@@ -6,4 +6,5 @@ urlpatterns = patterns('',
   url(r'^user/', include('registration.backends.simple.urls')),
   url(r'^user/', include('django.contrib.auth.urls')),
   url(r'^try/create/$', TryCreateView.as_view(), name='try_create'),
+  url(r'try/$', TryListView.as_view(), name='try_list'),
 )
