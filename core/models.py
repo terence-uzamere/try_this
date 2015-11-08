@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse 
 
 # Create your models here.
-class Try(models.Model):
+class Suggestion(models.Model):
   category = models.CharField(max_length=300)
   caption = models.TextField(null=True, blank=True)
   created_at = models.DateTimeField(auto_now_add=True)
@@ -13,4 +13,13 @@ class Try(models.Model):
     return self.title
   
   def get_absolute_url(self):
-    return reverse("try_detail", args=[self.id])
+    return reverse("suggestion_detail", args=[self.id])
+  
+class Comments(models.Model):
+  suggestion = models.ForeignKey(Suggestion)
+  user = models.ForeignKey(User)
+  created_at = models.DateTimeField(auto_now_add=True)
+  text = models.TextField()
+  
+  def __unicode__(self):
+    return self.text 

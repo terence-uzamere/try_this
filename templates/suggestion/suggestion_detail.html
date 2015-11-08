@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ suggestion.title }}</h1>
+<p>{{ suggestion.caption }}</p>
+<p>Suggested By {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
+{% if suggestion.user == user %}
+<p><a href="{% url 'suggestion_update' pk=question.id %}">Edit Question</a></p>
+{% endif %}
+<p><a href="{% url 'comment_create' pk=question.id %}">Write Answer</a></p>
+{% endblock %}
