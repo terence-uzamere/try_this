@@ -4,6 +4,13 @@
 <div class="panel">
   <h3><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.title }}</a></h3>
   <p>Suggested By {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
+  <p>{{ suggestion.vote_set.all.count }} Vote{{ suggestion.vote_set.all.count|pluralize }}</p>
+  <form method="post" action="{% url 'vote' %}">
+    {% csrf_token %}
+    <input type="hidden" name="suggestion" value="{{ suggestion.id }}"/>
+    <input type="hidden" name="user" value="{{ user.id }}"/>
+    <button>+</button>
+  </form>
 </div>
 {% endfor %}
 {% endblock %}
