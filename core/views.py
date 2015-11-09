@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.core.exceptions import PermissionDenied 
 from .models import *
 
 # Create your views here.
@@ -36,11 +37,23 @@ class SuggestionUpdateView(UpdateView):
   model = Suggestion
   template_name = 'suggestion/suggestion_form.html'
   fields = ['category', 'caption']
+  
+  def get_object(self, *args, **kwargs):
+    object = super(SuggestionUpdateView, self).get_object(*args, **kwargs)
+    if object.user != self.request.user:
+      raise PermissionDenied()
+    return object
 
 class SuggestionDeleteView(DeleteView):
   model = Suggestion
   template_name = 'suggestion/suggestion_confirm_delete.html'
   success_url = reverse_lazy('suggestion_list')
+  
+  def get_object(self, *args, **kwargs):
+    object = super(SuggestionDeleteView, self).get_objects(*args, **kwargs)
+    if object.user != self.request.user:
+      raise PermissionDenied()
+    return object
 
 class CommentCreateView(CreateView):
   model = Comments
@@ -64,6 +77,12 @@ class CommentUpdateView(UpdateView):
   def get_success_url(self):
     return self.object.suggestion.get_absolute_url()
   
+  def get_object(self, *args, **kwargs):
+    object = super(CommentUpdateView, self).get_object(*args, **kwargs)
+    if object.user != self.request.user:
+      raise PermissionDenied()
+    return object
+  
 class CommentDeleteView(DeleteView):
   model = Comments 
   pk_url_kwarg = 'answer_pk'
@@ -71,3 +90,9 @@ class CommentDeleteView(DeleteView):
   
   def get_success_url(self):
     return self.object.suggestion.get_absolute_url()
+  
+  def get_object(self, *args, **kwargs):
+    object = super(CommentDeleteView, self).get_object(*args, **kwargs)
+    if object.user != self.request.user:
+      raise PermissionDenied()
+    return object
