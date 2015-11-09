@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Try This - Where your suggestions are heard</title>
+    <title>Try This</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
@@ -47,14 +47,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Try This</a>
+                <a class="navbar-brand page-scroll" href="/">Try This</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                  {% if user.is_authenticated %}
-                  <li><a href="{% url 'suggestion_create' %}">Add Suggestion</a></li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    {% if user.is_authenticated %}
                   <li><a href="{% url 'auth_logout' %}">Logout</a></li>
                   {% else %}
                   <li><a href="{% url 'auth_login' %}">Login</a></li>
@@ -71,8 +73,8 @@
             <div class="header-content-inner">
                 <h1>Try This</h1>
                 <hr>
-                <p>Try This allows users to post suggestions of anything they have done recently</p>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">Try Something New</a>
+                <p>Try This is the newest wave</p>
+                <a href="#about" class="btn btn-primary btn-xl page-scroll">Try something new today</a>
             </div>
         </div>
     </header>
@@ -81,17 +83,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Try something new today!</h2>
+                    <h2 class="section-heading">Try Something New Today</h2>
                     <hr class="light">
-                    <p class="text-faded">Try this will have you going places you would have never imagined</p>
+                    <p class="text-faded">Try this will have you trying new things everyday</p>
                     <a href="#" class="btn btn-default btn-xl">Sign Up</a>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <section class="no-padding" id="portfolio">
+  <section class="no-padding" id="portfolio">
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
@@ -133,7 +134,7 @@
                                     Category
                                 </div>
                                 <div class="project-name">
-                                    TV/Shows
+                                    Food
                                 </div>
                             </div>
                         </div>
@@ -148,7 +149,7 @@
                                     Category
                                 </div>
                                 <div class="project-name">
-                                    Recipes
+                                    Lifestyle
                                 </div>
                             </div>
                         </div>
@@ -163,7 +164,7 @@
                                     Category
                                 </div>
                                 <div class="project-name">
-                                    Project Name
+                                    TV Shows/Movie
                                 </div>
                             </div>
                         </div>
@@ -178,7 +179,7 @@
                                     Category
                                 </div>
                                 <div class="project-name">
-                                    Project Name
+                                    Retail
                                 </div>
                             </div>
                         </div>
@@ -188,14 +189,7 @@
         </div>
     </section>
 
-    <aside class="bg-dark">
-        <div class="container text-center">
-            <div class="call-to-action">
-                <h2>Free Download at Start Bootstrap!</h2>
-                <a href="#" class="btn btn-default btn-xl wow tada">Download Now!</a>
-            </div>
-        </div>
-    </aside>
+    
 
     <section id="contact">
         <div class="container">

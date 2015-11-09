@@ -24,6 +24,13 @@ class SuggestionListView(ListView):
 class SuggestionDetailView(DetailView):
   model = Suggestion
   template_name = 'suggestion/suggestion_detail.html'
+  
+  def get_context_data(self, **kwargs):
+    context = super(SuggestionDetailView, self).get_context_data(**kwargs)
+    suggestion = Suggestion.objects.get(id=self.kwargs['pk'])
+    comments = Comments.objects.filter(suggestion=suggestion)
+    context['comments'] = comments
+    return context
 
 class SuggestionUpdateView(UpdateView):
   model = Suggestion
@@ -47,3 +54,12 @@ class CommentCreateView(CreateView):
     form.instance.user = self.request.user
     form.instance.suggestion = Suggestion.objects.get(id=self.kwargs['pk'])
     return super(SuggestionCreateView, self).form_valid(form)
+
+class CommentUpdateView(UpdateView):
+  model = Comments
+  pk_url_kwarg = 'answer_pk'
+  template_name = 'comment/comment_form.html'
+  fields = ['text']
+
+  def get_success_url(self):
+    return self.object.suggestion.get_absolute_url()

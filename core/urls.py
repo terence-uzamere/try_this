@@ -10,5 +10,6 @@ urlpatterns = patterns('',
   url(r'^suggestion/(?P<pk>\d+)/$', SuggestionDetailView.as_view(), name='suggestion_detail'),
   url(r'^suggestion/update/(?P<pk>\d+)/$', SuggestionUpdateView.as_view(), name='suggestion_update'),
   url(r'^suggestion/delete/(?P<pk>\d+)/$', SuggestionDeleteView.as_view(), name='suggestion_delete'),
-  url(r'^suggestion/(?P<pk>\d+)/comment/create/$', CommentCreateView.as_view(), name='comment_create')
+  url(r'^suggestion/(?P<pk>\d+)/comment/create/$', CommentCreateView.as_view(), name='comment_create'),
+  url(r'^suggestion/(?P<pk>\d+)/comment/update/(?P<comment_pk>\d+)/$', CommentUpdateView.as_view(), name='comment_update'),
 )
