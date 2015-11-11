@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 from django.shortcuts import render
 
 # Create your views here.
-=======
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 from django.core.urlresolvers import reverse_lazy
@@ -18,7 +16,7 @@ class SuggestionCreateView(CreateView):
   model = Suggestion
   template_name = 'suggestion/suggestion_form.html'
   fields = ['category', 'caption']
-  success_url = reverse_lazy('try_list')
+  success_url = reverse_lazy('suggestion_list')
 
   def form_valid(self, form):
     form.instance.user = self.request.user
@@ -116,4 +114,3 @@ class VoteFormView(FormView):
     else:
       prev_votes[0].delete()
     return redirect('suggestion_list')
->>>>>>> b36305de2d14cb77f2669caefd3f1b6f6d8f9afe
