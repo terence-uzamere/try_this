@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+ON_HEROKU = os.getenv('ON_HEROKU', False)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,7 +31,7 @@ MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '))ge7do&u=$p7v7d9_v0u&-1-5x&slnu@p3ahr9p77lj6m7!3q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 SECRET_KEY = 'oji8fc@9$y71-^rvtwr0qd6k(io5n99zemo2h=wmcca_5^1^i@'
 
@@ -95,13 +95,6 @@ WSGI_APPLICATION = 'try_this.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 if ON_HEROKU == False:
   DATABASES = {
