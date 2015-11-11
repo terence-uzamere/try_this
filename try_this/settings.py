@@ -12,18 +12,35 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+<<<<<<< HEAD
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+=======
+ON_HEROKU = os.getenv('ON_HEROKU', False)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
+>>>>>>> b36305de2d14cb77f2669caefd3f1b6f6d8f9afe
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 SECRET_KEY = '))ge7do&u=$p7v7d9_v0u&-1-5x&slnu@p3ahr9p77lj6m7!3q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+=======
+SECRET_KEY = 'oji8fc@9$y71-^rvtwr0qd6k(io5n99zemo2h=wmcca_5^1^i@'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+if ON_HEROKU == True:
+  DEBUG = False
+else:
+  DEBUG = True
+>>>>>>> b36305de2d14cb77f2669caefd3f1b6f6d8f9afe
 
 ALLOWED_HOSTS = []
 
@@ -31,6 +48,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+<<<<<<< HEAD
+=======
+    'registration',
+    'django.contrib.sites',
+>>>>>>> b36305de2d14cb77f2669caefd3f1b6f6d8f9afe
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +60,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+<<<<<<< HEAD
+=======
+    'bootstrap3'
+>>>>>>> b36305de2d14cb77f2669caefd3f1b6f6d8f9afe
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,7 +82,11 @@ ROOT_URLCONF = 'try_this.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [],
+=======
+        'DIRS': [os.path.join(MAIN_DIR, 'templates')],
+>>>>>>> b36305de2d14cb77f2669caefd3f1b6f6d8f9afe
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,12 +105,28 @@ WSGI_APPLICATION = 'try_this.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+<<<<<<< HEAD
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+=======
+if ON_HEROKU == False:
+  DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.sqlite3',
+          'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+      }
+  }
+else:
+    DATABASES = {}
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    ALLOWED_HOSTS = ['*']
+>>>>>>> b36305de2d14cb77f2669caefd3f1b6f6d8f9afe
 
 
 # Internationalization
@@ -101,3 +147,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
+=======
+STATICFILES_DIRS = (os.path.join(MAIN_DIR, 'static'),)
+STATIC_ROOT = 'staticfiles'
+
+LOGIN_URL = '/user/login'
+LOGIN_REDIRECT_URL = '/try/'
+SITE_ID = 1
+>>>>>>> b36305de2d14cb77f2669caefd3f1b6f6d8f9afe
