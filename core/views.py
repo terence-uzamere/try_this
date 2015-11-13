@@ -16,7 +16,7 @@ class Home(TemplateView):
 class SuggestionCreateView(CreateView):
   model = Suggestion
   template_name = 'suggestion/suggestion_form.html'
-  fields = ['category', 'caption']
+  fields = ['category', 'title', 'caption']
   success_url = reverse_lazy('suggestion_list')
 
   def form_valid(self, form):
@@ -26,6 +26,7 @@ class SuggestionCreateView(CreateView):
 class SuggestionListView(ListView):
   model = Suggestion
   template_name = 'suggestion/suggestion_list.html'
+  paginate_by = 5
 
 class SuggestionDetailView(DetailView):
   model = Suggestion
@@ -132,20 +133,20 @@ class UserDetailView(DetailView):
     return context
 
 class UserUpdateView(UpdateView):
-  model = User 
+  model = User
   slug_field = "username"
   template_name = 'user/user_form.html'
   fields = ['email', 'first_name,', 'last_name']
-  
+
   def get_success(self):
     return reverse('user_detail', args=[self.request.user.username])
-  
+
   def get_object(self, *args, **kwargs):
     object = super(UserUpdateView, self).get_object(*args, **kwargs)
     if object != self.request.user:
       raise PermissionDenied()
-    return object 
-  
+    return object
+
 class UserDeleteView(DeleteView):
   model = User
   slug_field = "username"
