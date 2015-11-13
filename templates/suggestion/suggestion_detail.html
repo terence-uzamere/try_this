@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ suggestion.title }}</h1>
+<h1>{{ suggestion.category }}</h1>
 <p>{{ suggestion.caption }}</p>
 <p>Suggested By {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
 {% if suggestion.user == user %}
-<p><a href="{% url 'suggestion_update' pk=question.id %}">Edit Suggestion</a></p>
+<p><a href="{% url 'suggestion_update' pk=suggestion.id %}">Edit Suggestion</a></p>
 {% endif %}
 {% if comments.count > 0 %}
 <h3>{{ comments.count }} Comment{{ comments.count|pluralize }}:</h3>
@@ -18,5 +18,5 @@
   <p>Answered By {{ comment.user.username }} on {{ comment.created.at }}</p>
 </div>
 {% endfor %}
-<p><a href="{% url 'comment_create' pk=question.id %}">Comment</a></p>
+<p><a href="{% url 'comment_create' pk=suggestion.id %}">Comment</a></p>
 {% endblock %}

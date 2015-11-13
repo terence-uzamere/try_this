@@ -35,10 +35,6 @@ class Vote(models.Model):
   def __unicode__(self):
     return "%s upvoted" % (self.user.username)
   
-class UserDetailView(DetailView):
-  model = User
-  slug_field = 'username'
-  template_name = 'user/user_detail.html'
-  context_object_name = 'user_in_view'
+
 
 

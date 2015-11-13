@@ -2,7 +2,7 @@
 {% block content %}
 {% for suggestion in object_list %}
 <div class="panel">
-  <h3><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.title }}</a></h3>
+  <h3><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.category }}</a></h3>
   <p>Suggested By {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
   <p>{{ suggestion.vote_set.all.count }} Vote{{ suggestion.vote_set.all.count|pluralize }}</p>
   <form method="post" action="{% url 'vote' %}">
@@ -12,5 +12,7 @@
     <button>+</button>
   </form>
 </div>
+{% empty %}
+<p>No results found.</p>
 {% endfor %}
 {% endblock %}

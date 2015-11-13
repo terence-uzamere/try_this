@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required
 from .views import *
 
 urlpatterns = patterns('',
@@ -16,4 +16,6 @@ urlpatterns = patterns('',
   url(r'^suggestion/(?P<suggestion_pk>\d+)/comment/delete/(?P<comment_pk>\d+)/$', login_required(CommentDeleteView.as_view()), name='comment_delete'),
   url(r'^vote/$', login_required(VoteFormView.as_view()), name='vote'),
   url(r'^user/(?P<slug>\w+)/$', login_required(UserDetailView.as_view()), name='user_detail'),
+  url(r'^user/update/(?P<slug>/w+)/$', login_required(UserUpdateView.as_view()), name='user_update'),
+  url(r'^search/$', login_required(SearchSuggestionListView.as_view()), name='search'),
 )

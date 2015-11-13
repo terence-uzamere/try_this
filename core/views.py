@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 
 # Create your views here.
@@ -61,21 +62,21 @@ class SuggestionDeleteView(DeleteView):
 
 class CommentCreateView(CreateView):
   model = Comments
-  template_name = 'comment/comment_form.html'
+  template_name = 'comments/comments_form.html'
   fields = ['text']
 
   def get_success_url(self):
-    return self.object.question.get_absolute_url()
+    return self.object.suggestion.get_absolute_url()
 
   def form_valid(self, form):
     form.instance.user = self.request.user
     form.instance.suggestion = Suggestion.objects.get(id=self.kwargs['pk'])
-    return super(SuggestionCreateView, self).form_valid(form)
+    return super(CommentCreateView, self).form_valid(form)
 
 class CommentUpdateView(UpdateView):
   model = Comments
-  pk_url_kwarg = 'answer_pk'
-  template_name = 'comment/comment_form.html'
+  pk_url_kwarg = 'comments_pk'
+  template_name = 'comments/comments_form.html'
   fields = ['text']
 
   def get_success_url(self):
@@ -90,7 +91,7 @@ class CommentUpdateView(UpdateView):
 class CommentDeleteView(DeleteView):
   model = Comments
   pk_url_kwarg = 'answer_pk'
-  template_name = 'comment/comment_confirm_delete.html'
+  template_name = 'comments/comments_confirm_delete.html'
 
   def get_success_url(self):
     return self.object.suggestion.get_absolute_url()
@@ -114,3 +115,58 @@ class VoteFormView(FormView):
     else:
       prev_votes[0].delete()
     return redirect('suggestion_list')
+
+class UserDetailView(DetailView):
+  model = User
+  slug_field = 'username'
+  template_name = 'user/user_detail.html'
+  context_object_name = 'user_in_view'
+
+  def get_context_data(self, **kwargs):
+    context = super(UserDetailView, self).get_context_data(**kwargs)
+    user_in_view = User.objects.get(username=self.kwargs['slug'])
+    suggestions = Suggestion.objects.filter(user=user_in_view)
+    context['suggestions'] = suggestions
+    comments = Comments.objects.filter(user=user_in_view)
+    context['comments'] = comments
+    return context
+
+class UserUpdateView(UpdateView):
+  model = User 
+  slug_field = "username"
+  template_name = 'user/user_form.html'
+  fields = ['email', 'first_name,', 'last_name']
+  
+  def get_success(self):
+    return reverse('user_detail', args=[self.request.user.username])
+  
+  def get_object(self, *args, **kwargs):
+    object = super(UserUpdateView, self).get_object(*args, **kwargs)
+    if object != self.request.user:
+      raise PermissionDenied()
+    return object 
+  
+class UserDeleteView(DeleteView):
+  model = User
+  slug_field = "username"
+  template_name = 'user/user_confirm_delete.html'
+
+  def get_success_url(self):
+    return reverse_lazy('logout')
+
+  def get_object(self, *args, **kwargs):
+    object = super(UserDeleteView, self).get_object(*args, **kwargs)
+    if object != self.request.user:
+      raise PermissionDenied()
+    return object
+
+  def delete(self, request, *args, **kwargs):
+    user = super(UserDeleteView, self).get_object(*args)
+    user.is_active = False
+    user.save()
+    return redirect(self.get_success_url())
+
+class SearchSuggestionListView(SuggestionListView):
+  def get_queryset(self):
+    incoming_query_string = self.request.GET.get('query', '')
+    return Suggestion.objects.filter(category__icontains=incoming_query_string)

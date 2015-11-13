@@ -4,4 +4,16 @@
 <p>Email Address: {{ user_in_view.email }}</p>
 <p>First Name: {{ user_in_view.first_name }}</p>
 <p>Last Name: {{ user_in_view.last_name }}</p>
+{% if user_in_view == user %}
+<p><a href="{% url 'user_update' slug=user.username %}">Edit Profile</a></p>
+{% endif %}
+<h3>Suggestions ({{ suggestions.count }})</h3>
+{% for suggestion in suggestions %}
+<p><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.title }}</a></p>
+{% endfor %}
+<h3>Comments ({{ comments.count }})</h3>
+{% for comment in comments %}
+<p><a href="{{ comment.suggestion.get_absolute_url }}">{{ comment.suggestion.category }}</a></p>
+<p>> {{ comment.text }}</p>
+{% endfor %}
 {% endblock %}
