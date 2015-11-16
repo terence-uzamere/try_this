@@ -16,7 +16,7 @@ class Home(TemplateView):
 class SuggestionCreateView(CreateView):
   model = Suggestion
   template_name = 'suggestion/suggestion_form.html'
-  fields = ['category', 'title', 'caption']
+  fields = ['category', 'name', 'caption']
   success_url = reverse_lazy('suggestion_list')
 
   def form_valid(self, form):
@@ -42,7 +42,7 @@ class SuggestionDetailView(DetailView):
 class SuggestionUpdateView(UpdateView):
   model = Suggestion
   template_name = 'suggestion/suggestion_form.html'
-  fields = ['category', 'caption']
+  fields = ['category', 'name', 'caption']
 
   def get_object(self, *args, **kwargs):
     object = super(SuggestionUpdateView, self).get_object(*args, **kwargs)

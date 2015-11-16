@@ -7,7 +7,7 @@
 {% if user_in_view == user %}
 <p><a href="{% url 'user_update' slug=user.username %}">Edit Profile</a></p>
 {% endif %}
-<h3>Suggestions ({{ suggestions.count }})</h3>
+<h3>Suggestions ({{ suggestion.count }})</h3>
 {% for suggestion in suggestions %}
 <p><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.title }}</a></p>
 {% endfor %}
