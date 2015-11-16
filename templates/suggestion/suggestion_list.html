@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for suggestion in object_list %}
+{% for suggestions in suggestion_list %}
 <div class="panel">
   <h3><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.title }}</a></h3>
   <p>Suggested By {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
