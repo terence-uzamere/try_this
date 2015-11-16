@@ -57,7 +57,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'bootstrap3'
+    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,6 +89,15 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib..auth.backends.ModelBackend',
+
+
+)
 
 WSGI_APPLICATION = 'try_this.wsgi.application'
 
