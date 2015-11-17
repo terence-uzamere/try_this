@@ -27,6 +27,12 @@ class SuggestionListView(ListView):
   model = Suggestion
   template_name = 'suggestion/suggestion_list.html'
   paginate_by = 5
+  
+  def get_context_data(self, **kwargs):
+    context = super(SuggestionListView, self).get_context_data(**kwargs)
+    user_votes = Suggestion.objects.filter(vote__user=self..request.user)
+    context['user_votes'] = user_votes
+    return context 
 
 class SuggestionDetailView(DetailView):
   model = Suggestion
