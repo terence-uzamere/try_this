@@ -27,12 +27,12 @@ class SuggestionListView(ListView):
   model = Suggestion
   template_name = 'suggestion/suggestion_list.html'
   paginate_by = 5
-  
+
   def get_context_data(self, **kwargs):
     context = super(SuggestionListView, self).get_context_data(**kwargs)
-    user_votes = Suggestion.objects.filter(vote__user=self..request.user)
+    user_votes = Suggestion.objects.filter(vote__user=self.request.user)
     context['user_votes'] = user_votes
-    return context 
+    return context
 
 class SuggestionDetailView(DetailView):
   model = Suggestion
@@ -115,12 +115,22 @@ class VoteFormView(FormView):
   def form_valid(self, form):
     user = self.request.user
     suggestion = Suggestion.objects.get(pk=form.data["suggestion"])
-    prev_votes = Vote.objects.filter(user=user, suggestion=suggestion)
-    has_voted = (prev_votes.count()>0)
-    if not has_voted:
-      Vote.objects.create(user=user, suggestion=suggestion)
-    else:
-      prev_votes[0].delete()
+    try:
+        comments = Comments.objects.get(pk=form.data["comments"])
+        prev_votes = Vote.objects.filter(user=user, comments=comments)
+        has_voted = (prev_votes.count()>0)
+        if not has_voted:
+            Vote.objects.create(user=user, comments=comments)
+        else:
+            prev_votes[0].delete()
+        return redirect(reverse('suggestion_detail', args=[form.data["suggestion"]]))
+    except:
+        prev_votes = Vote.objects.filter(user=user, suggestion=suggestion)
+        has_voted = (prev_votes.count()>0)
+        if not has_voted:
+            Vote.objects.create(user=user, suggestion=suggestion)
+        else:
+            prev_votes[0].delete()
     return redirect('suggestion_list')
 
 class UserDetailView(DetailView):

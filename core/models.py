@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-VISIBILITY_CHOICES = (
+CATEGORY_CHOICES = (
 (0, 'Night Life'),
 (1, 'Restaurants'),
 (2, 'TV Shows/Movies'),
@@ -22,7 +22,7 @@ class Suggestion(models.Model):
   caption = models.TextField(null=True, blank=True)
   created_at = models.DateTimeField(auto_now_add=True)
   user = models.ForeignKey(User)
-  category = models.IntegerField(choices=VISIBILITY_CHOICES, default=0)
+  category = models.IntegerField(choices=CATEGORY_CHOICES, default=0)
 
   def __unicode__(self):
     return self.name
@@ -35,14 +35,15 @@ class Comments(models.Model):
   user = models.ForeignKey(User)
   created_at = models.DateTimeField(auto_now_add=True)
   text = models.TextField()
-  visibility = models.IntegerField(choices=VISIBILITY_CHOICES, default=0)
+  category = models.IntegerField(choices=CATEGORY_CHOICES, default=0)
 
   def __unicode__(self):
     return self.text
 
 class Vote(models.Model):
   user = models.ForeignKey(User)
-  suggestion = models.ForeignKey(Suggestion)
+  suggestion = models.ForeignKey(Suggestion, blank=True, null=True)
+  comments = models.ForeignKey(Comments, blank=True, null=True)
 
   def __unicode__(self):
     return "%s upvoted" % (self.user.username)
