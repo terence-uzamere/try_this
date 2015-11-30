@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ suggestion.get_category_display }}</h1>
+<h1>{{ suggestion.name }}</h1>
 <p>{{ suggestion.caption }}</p>
-<p>Suggested By {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
+<p>Suggested by {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
 <p>{{ comments.vote_set.all.count }} Vote{{ comments.vote_set.all.count|pluralize }}</p>
 <p>Commented {% if comments.visibility == 0 %} by <a href="{% url 'user_detail' slug=comments.user.username %}">{{ comments.user.username }}</a> {% endif %} on {{ comments.created_at }}</p>
 <form method="post" action="{% url 'vote' %}">
     <span class="badge">{{ comments.vote_set.all.count }} Vote{{  comments.vote_set.all.count|pluralize }}</span>
     {% csrf_token %}
     <input type="hidden" name="comments" value="{{ comments.id }}" />
-    <input type="hidden" name="suggestion" value="{{ question.id }}" />
+    <input type="hidden" name="suggestion" value="{{ suggestion.id }}" />
     <input type="hidden" name="user" value="{{ user.id }}" />
     {% if comments in user_votes %}
         <button class="btn btn-link">
@@ -23,6 +23,7 @@
 </form>
 {% if suggestion.user == user %}
 <p><a href="{% url 'suggestion_update' pk=suggestion.id %}">Edit Suggestion</a></p>
+<p><a href="{% url 'suggestion_delete' pk=suggestion.id %}">Delete Suggestion</a></p>
 {% endif %}
 {% if comments.count > 0 %}
 <h3>{{ comments.count }} Comment{{ comments.count|pluralize }}:</h3>
@@ -33,7 +34,7 @@
   {% if comments.user == user %}
   <p><a href="{% url 'comment_update' suggestion_pk=suggestion.id comment_pk=comment.id %}">Edit Comment</a></p>
   {% endif %}
-  <p>Comment By {{ comments.user.username }} on {{ comments.created.at }}</p>
+  <p>Comment by {{ comments.user.username }} on {{ comments.created.at }}</p>
 </div>
 {% endfor %}
 <p><a href="{% url 'comment_create' pk=suggestion.id %}">Comment</a></p>

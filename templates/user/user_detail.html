@@ -9,7 +9,7 @@
 {% endif %}
 <h3>Suggestions ({{ suggestion.count }})</h3>
 {% for suggestion in suggestions %}
-<p><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.title }}</a></p>
+<p><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.get_category_display }}</a></p>
 {% endfor %}
 <h3>Comments ({{ comments.count }})</h3>
 {% for comment in comments %}

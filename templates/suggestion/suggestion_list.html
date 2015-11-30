@@ -3,14 +3,14 @@
 {% for suggestion in suggestion_list %}
 <div class="panel">
   <h3><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.get_category_display }}</a></h3>
-  <p>Suggested By {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
+  <p>Suggested by {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
   <form method="post" action="{% url 'vote' %}">
-    <span class="badge">{{ question.answer_set.all.count }} Answer{{  question.answer_set.all.count|pluralize }}</span>
-    <span class="badge">{{ question.vote_set.all.count }} Vote{{ question.vote_set.all.count|pluralize }}</span> 
+    <span class="badge">{{ suggestion.comments_set.all.count }} Comment{{  suggestion.comments_set.all.count|pluralize }}</span>
+    <span class="badge">{{ suggestion.vote_set.all.count }} Vote{{ suggestion.vote_set.all.count|pluralize }}</span>
     {% csrf_token %}
-    <input type="hidden" name="question" value="{{ question.id }}" />
+    <input type="hidden" name="suggestion" value="{{ suggestion.id }}" />
     <input type="hidden" name="user" value="{{ user.id }}" />
-        {% if question in user_votes %}  
+        {% if suggestion in user_votes %}
         <button class="btn btn-link">
           <span class="glyphicon glyphicon-thumbs-down"></span>
         </button>

@@ -47,6 +47,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+import django
+
 INSTALLED_APPS = (
     'registration',
     'django.contrib.sites',
@@ -58,6 +60,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'core',
     'bootstrap3',
+    'easy_maps'
+)
+
+if django.VERSION < (1, 7):
+  INSTALLED_APPS += (
+      'south',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -139,4 +147,7 @@ STATIC_ROOT = 'staticfiles'
 LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/suggestion/'
 SITE_ID = 1
+EASY_MAPS_CENTER = (-41.3, 32)
 
+#Default: 'easy_maps.geocode.google_v3'
+EASY_MAPS_GEOCODE = 'example.custom_geocode'
