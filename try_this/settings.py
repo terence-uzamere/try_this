@@ -14,10 +14,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 ON_HEROKU = os.getenv('ON_HEROKU', False)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-ON_HEROKU = os.getenv('ON_HEROKU', False)
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -30,10 +26,6 @@ MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = '))ge7do&u=$p7v7d9_v0u&-1-5x&slnu@p3ahr9p77lj6m7!3q'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-
-
-SECRET_KEY = 'oji8fc@9$y71-^rvtwr0qd6k(io5n99zemo2h=wmcca_5^1^i@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_HEROKU == True:
@@ -60,13 +52,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'core',
     'bootstrap3',
-    'easy_maps'
 )
 
-if django.VERSION < (1, 7):
-  INSTALLED_APPS += (
-      'south',
-)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -147,7 +134,3 @@ STATIC_ROOT = 'staticfiles'
 LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/suggestion/'
 SITE_ID = 1
-EASY_MAPS_CENTER = (-41.3, 32)
-
-#Default: 'easy_maps.geocode.google_v3'
-EASY_MAPS_GEOCODE = 'example.custom_geocode'
