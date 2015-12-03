@@ -34,7 +34,7 @@
   {% if comments.user == user %}
   <p><a href="{% url 'comment_update' suggestion_pk=suggestion.id comment_pk=comment.id %}">Edit Comment</a></p>
   {% endif %}
-  <p>Comment by {{ comments.user.username }} on {{ comments.created.at }}</p>
+  <p>Comment by <a href="{% url 'user_detail' slug=suggestion.user.username %}"> {{ comment.user.username }} on {{ comment.created_at }}</p>
 </div>
 {% endfor %}
 <p><a href="{% url 'comment_create' pk=suggestion.id %}">Comment</a></p>

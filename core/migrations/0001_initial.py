@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='Try',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('category', models.CharField(max_length=300)),
+                ('category', models.IntegerField(default=0, choices=[(0, b'Night Life'), (1, b'Restaurants'), (2, b'Movies/TV Shows'), (3, b'Recipes'), (4, b'Food'), (5, b'Lifestyle')]),),
                 ('caption', models.TextField(null=True, blank=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
