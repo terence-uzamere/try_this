@@ -2,7 +2,7 @@
 {% block content %}
 <h1>{{ suggestion.name }}</h1>
 <p>{{ suggestion.caption }}</p>
-<p>Suggested by {{ suggestion.user.username }} on {{ suggestion.created_at }}</p>
+<p>Suggested by <a href="{% url 'user_detail' slug=suggestion.user.username %}">{{ suggestion.user.username }}</a> on {{ suggestion.created_at }}</p>
 <p>{{ comments.vote_set.all.count }} Vote{{ comments.vote_set.all.count|pluralize }}</p>
 <p>Commented {% if comments.visibility == 0 %} by <a href="{% url 'user_detail' slug=comments.user.username %}">{{ comments.user.username }}</a> {% endif %} on {{ comments.created_at }}</p>
 <form method="post" action="{% url 'vote' %}">
