@@ -62,7 +62,7 @@ class SuggestionDeleteView(DeleteView):
   success_url = reverse_lazy('suggestion_list')
 
   def get_object(self, *args, **kwargs):
-    object = super(SuggestionDeleteView, self).get_objects(*args, **kwargs)
+    object = super(SuggestionDeleteView, self).get_object(*args, **kwargs)
     if object.user != self.request.user:
       raise PermissionDenied()
     return object
