@@ -2,7 +2,7 @@
 {% block content %}
 {% for suggestion in suggestion_list %}
 <div class="panel">
-  <h3><a href="{{ suggestion.get_absolute_url }}">{% if suggestion.category == 0%}Night Life{% endif %}{% if suggestion.category == 1%}Restaurants{% endif %}{% if suggestion.category == 2%}TV Shows/Movies{% endif %}{% if suggestion.category == 3%}Recipes{% endif %}{% if suggestion.category == 4%}Food{% endif %}{% if suggestion.category == 5%}Lifestyle{% endif %}</a></h3>
+<h3><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.get_category_display }}</a></h3>
   <p>Suggested by <a href="{% url 'user_detail' slug=suggestion.user.username %}">{{ suggestion.user.username }}</a> on {{ suggestion.created_at }}</p>
   <form method="post" action="{% url 'vote' %}">
     <span class="badge">{{ suggestion.comments_set.all.count }} Comment{{  suggestion.comments_set.all.count|pluralize }}</span>
