@@ -154,7 +154,7 @@ class UserUpdateView(UpdateView):
   template_name = 'user/user_form.html'
   fields = ['email', 'first_name', 'last_name']
 
-  def get_success(self):
+  def get_success_url(self):
     return reverse('user_detail', args=[self.request.user.username])
 
   def get_object(self, *args, **kwargs):
