@@ -52,7 +52,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'core',
     'bootstrap3',
-    'star_ratings'
 )
 
 
