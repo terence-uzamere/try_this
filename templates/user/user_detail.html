@@ -9,11 +9,11 @@
 {% endif %}
 <h3>Suggestions ({{ suggestions.count }})</h3>
 {% for suggestion in suggestions %}
-<p><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.get_category_display }}</a></p>
+<p><a href="{{ suggestion.get_absolute_url }}">{{ suggestion.name }}</a></p>
 {% endfor %}
 <h3>Comments ({{ comments.count }})</h3>
 {% for comment in comments %}
-<p><a href="{{ comment.suggestion.get_absolute_url }}">{{ comment.get_category_display }}</a></p>
+<p><a href="{{ comment.suggestion.get_absolute_url }}">{{ comment.suggestion.name }}</a></p>
 <p>> {{ comment.text }}</p>
 {% endfor %}
 {% endblock %}
