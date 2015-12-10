@@ -3,12 +3,13 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 CATEGORY_CHOICES = (
-(0, 'Night Life'),
-(1, 'Restaurants'),
-(2, 'TV Shows/Movies'),
-(3, 'Recipes'),
-(4, 'Food'),
-(5, 'Lifestyle'),
+(0, 'Select...'),
+(1, 'Night Life'),
+(2, 'Restaurants'),
+(3, 'TV Shows/Movies'),
+(4, 'Recipes'),
+(5, 'Food'),
+(6, 'Lifestyle'),
 )
 
 
@@ -23,7 +24,7 @@ class Suggestion(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
   user = models.ForeignKey(User)
   category = models.IntegerField(choices=CATEGORY_CHOICES, default=0)
-  
+
 
   def __unicode__(self):
     return self.name
