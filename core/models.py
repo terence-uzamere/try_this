@@ -2,15 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-RATING_CHOICES = (
-(0, 'None'),
-(1, '*'),
-(2, '**'),
-(3, '***'),
-(4, '****'),
-(5, '*****'),
-)
-
 CATEGORY_CHOICES = (
 (0, 'Night Life'),
 (1, 'Restaurants'),
@@ -32,7 +23,7 @@ class Suggestion(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
   user = models.ForeignKey(User)
   category = models.IntegerField(choices=CATEGORY_CHOICES, default=0)
-  rating = models.IntegerField(choices=RATING_CHOICES, default=0)
+  
 
   def __unicode__(self):
     return self.name
