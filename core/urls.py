@@ -19,4 +19,5 @@ urlpatterns = patterns('',
   url(r'^user/update/(?P<slug>\w+)/$', login_required(UserUpdateView.as_view()), name='user_update'),
   url(r'^user/delete/(?P<slug>\w+)/$', login_required(UserDeleteView.as_view()), name='user_delete'),
   url(r'^search/$', login_required(SearchSuggestionListView.as_view()), name='search'),
+  url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 )

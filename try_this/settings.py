@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'core',
     'bootstrap3',
+    'star_ratings'
 )
 
 
@@ -80,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
             ],
         },
     },
@@ -134,3 +136,5 @@ STATIC_ROOT = 'staticfiles'
 LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/suggestion/'
 SITE_ID = 1
+
+

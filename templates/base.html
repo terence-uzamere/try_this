@@ -1,9 +1,12 @@
 {% load staticfiles %}
+{% load static %}
+{% load ratings %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <link href='https://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -98,6 +101,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
 </body>
 

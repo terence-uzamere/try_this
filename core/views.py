@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 
@@ -16,7 +17,7 @@ class Home(TemplateView):
 class SuggestionCreateView(CreateView):
   model = Suggestion
   template_name = 'suggestion/suggestion_form.html'
-  fields = ['category', 'name', 'caption']
+  fields = ['category', 'name', 'caption', 'rating']
   success_url = reverse_lazy('suggestion_list')
 
   def form_valid(self, form):
@@ -44,6 +45,8 @@ class SuggestionDetailView(DetailView):
     comments = Comments.objects.filter(suggestion=suggestion)
     context['comments'] = comments
     return context
+    rating = Answer.objects.filter(question=question).aggregate(Avg('rating'))
+    context['rating'] = rating
 
 class SuggestionUpdateView(UpdateView):
   model = Suggestion
